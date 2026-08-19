@@ -69,7 +69,7 @@
       <div class="m-section">
         <h4>Content</h4>
         <div class="m-code">${escapeHtml(entry.preview)}</div>
-        <button class="copy-btn" onclick="navigator.clipboard.writeText(${JSON.stringify(escapeHtml(entry.preview))})">Copy content</button>
+        <button class="copy-btn" data-copy="${encodeURIComponent(entry.preview)}">Copy content</button>
       </div>
       <div class="m-section">
         <h4>Source</h4>
@@ -121,6 +121,17 @@
     document.querySelectorAll("[data-close]").forEach((el) =>
       el.addEventListener("click", closeModal)
     );
+    document.addEventListener("click", (e) => {
+      const btn = e.target.closest("[data-copy]");
+      if (btn) {
+        const text = decodeURIComponent(btn.dataset.copy);
+        navigator.clipboard.writeText(text).then(() => {
+          const original = btn.textContent;
+          btn.textContent = "✓ Copied!";
+          setTimeout(() => (btn.textContent = original), 1500);
+        });
+      }
+    });
     document.addEventListener("keydown", (e) => {
       if (e.key === "Escape") closeModal();
     });
