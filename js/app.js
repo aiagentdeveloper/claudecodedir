@@ -79,12 +79,12 @@
         ${entry.link ? `<a class="btn-ghost" href="${entry.link}" target="_blank" rel="noopener">View source ↗</a>` : ""}
         <a class="btn-primary" href="sponsor.html">★ Feature this listing</a>
       </div>`;
-    modal.hidden = false;
+    modal.classList.add("open");
     document.body.style.overflow = "hidden";
   }
 
   function closeModal() {
-    $("#detailModal").hidden = true;
+    $("#detailModal").classList.remove("open");
     document.body.style.overflow = "";
   }
 

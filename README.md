@@ -2,7 +2,7 @@
 
 **The curated, searchable directory of CLAUDE.md files, slash commands, subagents and MCP servers for Claude Code.**
 
-Live at: **https://claudecodedir.com** (deploy via GitHub Pages — see below)
+Live at: **https://aiagentdeveloper.github.io/claudecodedir** (deploy via GitHub Pages — see below)
 
 Built by the community, for the community. 100% free. Not affiliated with Anthropic.
 
@@ -52,7 +52,7 @@ SEO content lives in [`/guides`](guides/index.html): CLAUDE.md writing, custom c
 1. Push this folder to a new GitHub repo.
 2. Repo → **Settings → Pages** → Source: **Deploy from a branch** → branch `main` → root.
 3. Done. URL: `https://<user>.github.io/<repo>/`.
-4. Optional: point a custom domain (`claudecodedir.com`) in Pages settings.
+4. Optional: point a custom domain (`aiagentdeveloper.github.io/claudecodedir`) in Pages settings.
 
 ## 🧡 Credits
 Inspired by [cursor.directory](https://cursor.directory) and built with the Starter Story playbook: find a hot niche, launch fast, open-source everything.

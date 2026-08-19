@@ -42,7 +42,7 @@ Use these assets on launch day. Timing: **Product Hunt first, then Reddit/HN, th
 ### r/ClaudeAI (main launch)
 **Title:** [Project] I made a directory of 60+ CLAUDE.md files, commands & MCP servers — all copy-paste ready
 **Body:**
-> The Claude Code community is sharing incredible workflows, but they're scattered everywhere. I built a free, open-source directory: claudecodedir.com
+> The Claude Code community is sharing incredible workflows, but they're scattered everywhere. I built a free, open-source directory: aiagentdeveloper.github.io/claudecodedir
 >
 > - 60+ entries across CLAUDE.md files, slash commands, subagents and MCP servers
 > - Every entry has install instructions + the actual content to copy
@@ -65,7 +65,7 @@ Post title: [P] The "cursor.directory" of Claude Code is here — 60+ workflows,
 4/ Every entry ships with: 📦 install instructions · 📄 the actual content · 🔗 source link. Search + filter by type, zero login.
 5/ Fully open source. Add your own entry with a single PR — this directory belongs to the community.
 6/ Free forever for organic listings. ★ Featured slots are clearly marked and fund the hosting.
-7/ 🚀 claudecodedir.com — share it with a teammate who still writes the same prompt 50 times a day.
+7/ 🚀 aiagentdeveloper.github.io/claudecodedir — share it with a teammate who still writes the same prompt 50 times a day.
 
 ---
 
