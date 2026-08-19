@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sponsor a Listing — Claude Code Directory</title>
+  <meta name="description" content="Feature your CLAUDE.md, command, agent or MCP server at the top of the Claude Code Directory. Pricing, reach and how to apply.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .page-hero { padding: 60px 0 30px; text-align: center; }
+    .page-hero h1 { font-size: clamp(1.8rem, 4vw, 2.6rem); margin-bottom: 10px; }
+    .pricing { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; padding: 30px 0 50px; }
+    .plan { background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; padding: 26px; display: flex; flex-direction: column; }
+    .plan.hot { border-color: var(--accent); box-shadow: 0 0 30px rgba(217,119,87,.15); }
+    .plan h3 { font-size: 1.15rem; }
+    .plan .price { font-size: 2rem; font-weight: 800; margin: 10px 0 4px; color: var(--accent); }
+    .plan .per { color: var(--text-dim); font-size: .85rem; margin-bottom: 14px; }
+    .plan ul { list-style: none; margin-bottom: 20px; }
+    .plan li { padding: 6px 0; font-size: .92rem; color: var(--text-dim); }
+    .plan li::before { content: "✓ "; color: var(--green); font-weight: 700; }
+    .buy-btn { display: block; text-align: center; padding: 12px; border-radius: 10px; background: var(--accent); color: #fff; font-weight: 700; text-decoration: none; margin-top: auto; }
+    .buy-btn.alt { background: var(--bg-soft); border: 1px solid var(--border); color: var(--text); }
+    .faq { max-width: 720px; margin: 0 auto 60px; }
+    .faq h2 { margin-bottom: 16px; }
+    .faq details { border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; margin-bottom: 10px; }
+    .faq summary { cursor: pointer; font-weight: 600; }
+    .faq p { color: var(--text-dim); font-size: .92rem; margin-top: 8px; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo">🤖 ClaudeCode<span class="logo-accent">.dir</span></a>
+      <nav class="main-nav">
+        <a href="index.html">Rules</a>
+        <a href="index.html#commands">Commands</a>
+        <a href="index.html#agents">Agents</a>
+        <a href="guides/index.html">Guides</a>
+        <a href="sponsor.html" class="nav-cta">★ Sponsor</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="page-hero container">
+    <h1>Feature your <span class="gradient">CLAUDE.md / MCP / Agent</span></h1>
+    <p style="color:var(--text-dim);max-width:640px;margin:0 auto">Reach the fastest-growing community in AI coding. Featured listings sit at the top of the directory and inside our weekly newsletter — seen by thousands of Claude Code users.</p>
+  </section>
+
+  <section class="container">
+    <div class="pricing">
+      <div class="plan">
+        <h3>Featured Listing</h3>
+        <div class="price">$49<span class="per" style="display:inline">/month</span></div>
+        <div class="per">One entry, first position in its category</div>
+        <ul>
+          <li>★ Starred slot in the directory</li>
+          <li>Shown in the featured strip on home</li>
+          <li>Monthly newsletter mention</li>
+          <li>Cancel anytime</li>
+        </ul>
+        <a class="buy-btn" href="#" onclick="alert('Ödeme sayfası hazırlanıyor — iletişim: sponsor@claudecodedir.com');return false;">Get featured</a>
+      </div>
+      <div class="plan hot">
+        <h3>Category Sponsor</h3>
+        <div class="price">$149<span class="per" style="display:inline">/month</span></div>
+        <div class="per">Banner + top listing in one category</div>
+        <ul>
+          <li>★ Everything in Featured</li>
+          <li>Banner on category pages</li>
+          <li>Dedicated spotlight post (guides blog)</li>
+          <li>Social mention on launch channels</li>
+        </ul>
+        <a class="buy-btn" href="#" onclick="alert('Ödeme sayfası hazırlanıyor — iletişim: sponsor@claudecodedir.com');return false;">Become sponsor</a>
+      </div>
+      <div class="plan">
+        <h3>Founding Sponsor</h3>
+        <div class="price">$499<span class="per" style="display:inline">/month</span></div>
+        <div class="per">Exclusive logo placement + newsletter feature</div>
+        <ul>
+          <li>Everything in Category Sponsor</li>
+          <li>Logo on homepage hero (1 slot only)</li>
+          <li>First mention in weekly newsletter</li>
+          <li>Priority support from the team</li>
+        </ul>
+        <a class="buy-btn alt" href="#" onclick="alert('Ödeme sayfası hazırlanıyor — iletişim: sponsor@claudecodedir.com');return false;">Apply (1 slot)</a>
+      </div>
+    </div>
+
+    <div class="faq">
+      <h2>FAQ</h2>
+      <details open>
+        <summary>Who should sponsor?</summary>
+        <p>MCP server builders, Claude Code plugin authors, agencies selling Claude workflows, and dev tools serving the AI-coding crowd.</p>
+      </details>
+      <details>
+        <summary>Is my listing marked as sponsored?</summary>
+        <p>Yes — featured entries are clearly marked with a ★ badge. We keep the directory honest; organic entries always remain free.</p>
+      </details>
+      <details>
+        <summary>How do I pay?</summary>
+        <p>Invoices and cards are processed via our payment page (Stripe/Gumroad). Reach us at sponsor@claudecodedir.com for custom plans.</p>
+      </details>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>Claude Code Directory — built for the Claude Code community. Not affiliated with Anthropic.</p>
+      <p><a href="https://github.com" target="_blank">GitHub</a> · <a href="sponsor.html">Sponsor a listing</a> · <a href="guides/index.html">Guides</a></p>
+    </div>
+  </footer>
+</body>
+</html>

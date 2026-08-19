@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Connect MCP Servers to Claude Code (GitHub, Notion, Brave…) — Guide</title>
+  <meta name="description" content="How to connect MCP servers to Claude Code: claude mcp add, project vs user scope, official servers list and security basics.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .article { max-width: 760px; margin: 0 auto; padding: 40px 0 70px; }
+    .article h1 { font-size: clamp(1.6rem, 4vw, 2.3rem); margin-bottom: 12px; }
+    .article .meta { color: var(--text-dim); font-size: .85rem; margin-bottom: 24px; }
+    .article h2 { margin: 32px 0 12px; font-size: 1.3rem; }
+    .article p, .article li { color: var(--text-dim); }
+    .article p, .article ul { margin-bottom: 14px; }
+    .article pre { background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 16px; overflow-x: auto; font-size: .85rem; margin-bottom: 18px; }
+    .article code { font-family: "SFMono-Regular", Consolas, monospace; background: var(--bg-soft); padding: 2px 6px; border-radius: 4px; font-size: .85em; }
+    .article pre code { background: none; padding: 0; }
+    .article table { width: 100%; border-collapse: collapse; margin-bottom: 18px; font-size: .9rem; }
+    .article th, .article td { border: 1px solid var(--border); padding: 8px 12px; text-align: left; color: var(--text-dim); }
+    .article th { color: var(--text); background: var(--bg-soft); }
+    .article .warn { border-left: 3px solid var(--yellow); background: var(--bg-soft); padding: 12px 16px; border-radius: 0 8px 8px 0; margin-bottom: 18px; font-size: .92rem; }
+    .breadcrumb { color: var(--text-dim); font-size: .85rem; margin-bottom: 20px; }
+    .breadcrumb a { color: var(--text-dim); }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="../index.html" class="logo">🤖 ClaudeCode<span class="logo-accent">.dir</span></a>
+      <nav class="main-nav">
+        <a href="../index.html">Rules</a>
+        <a href="../index.html#commands">Commands</a>
+        <a href="../index.html#agents">Agents</a>
+        <a href="index.html">Guides</a>
+        <a href="../sponsor.html" class="nav-cta">★ Sponsor</a>
+      </nav>
+    </div>
+  </header>
+
+  <article class="article container">
+    <p class="breadcrumb"><a href="index.html">Guides</a> / MCP servers</p>
+    <h1>Connect MCP Servers to Claude Code</h1>
+    <p class="meta">8 min read · Intermediate</p>
+
+    <p>MCP (Model Context Protocol) servers give Claude Code real tools: GitHub, Notion, databases, browsers. One command connects a server:</p>
+    <pre><code>claude mcp add github -- npx -y @modelcontextprotocol/server-github</code></pre>
+
+    <h2>Three scopes, one rule</h2>
+    <table>
+      <tr><th>Scope</th><th>Where</th><th>Shared with team?</th></tr>
+      <tr><td>Local (default)</td><td><code>~/.claude.json</code></td><td>No — current project only</td></tr>
+      <tr><td>Project</td><td><code>.mcp.json</code></td><td>Yes — commit it</td></tr>
+      <tr><td>User</td><td><code>~/.claude.json</code></td><td>No — all your projects</td></tr>
+    </table>
+    <p>For team setups, add servers to <code>.mcp.json</code> at the project root and commit it:</p>
+    <pre><code>{
+  "mcpServers": {
+    "github": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-github"],
+      "env": { "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_TOKEN}" }
+    }
+  }
+}</code></pre>
+
+    <h2>The official starters</h2>
+    <table>
+      <tr><th>Server</th><th>Install</th><th>Best for</th></tr>
+      <tr><td>GitHub</td><td><code>npx -y @modelcontextprotocol/server-github</code></td><td>Issues, PRs, repos, search</td></tr>
+      <tr><td>Filesystem</td><td><code>npx -y @modelcontextprotocol/server-filesystem &lt;dir&gt;</code></td><td>Sandboxed file access</td></tr>
+      <tr><td>Memory</td><td><code>npx -y @modelcontextprotocol/server-memory</code></td><td>Cross-session knowledge graph</td></tr>
+      <tr><td>Brave Search</td><td><code>npx -y @modelcontextprotocol/server-brave-search</code></td><td>Fresh web results</td></tr>
+      <tr><td>Fetch</td><td><code>npx -y @modelcontextprotocol/server-fetch</code></td><td>Read URLs as markdown</td></tr>
+      <tr><td>Puppeteer</td><td><code>npx -y @modelcontextprotocol/server-puppeteer</code></td><td>Browser automation</td></tr>
+      <tr><td>Sequential Thinking</td><td><code>npx -y @modelcontextprotocol/server-sequential-thinking</code></td><td>Structured reasoning</td></tr>
+      <tr><td>Notion</td><td><code>npx -y @notionhq/notion-mcp-server</code></td><td>Pages, databases, blocks</td></tr>
+      <tr><td>Playwright</td><td><code>npx -y @playwright/mcp</code></td><td>E2E tests, real browser</td></tr>
+    </table>
+
+    <h2>Security basics</h2>
+    <div class="warn">⚠️ Servers that fetch external content (Fetch, Puppeteer, web tools) can expose Claude to <strong>prompt injection</strong> from untrusted pages. Verify any server before connecting it — and prefer tokens via env vars, never in committed files.</div>
+    <ul>
+      <li>Store tokens in environment variables referenced with <code>${VAR}</code>.</li>
+      <li>Use <code>claude mcp list</code> to see what's connected.</li>
+      <li>For managed teams, lock down servers with <code>allowedMcpServers</code> in managed settings.</li>
+    </ul>
+
+    <h2>Next steps</h2>
+    <ul>
+      <li>Browse 14 MCP servers in the <a href="../index.html">directory</a>.</li>
+      <li>Build your own server with the official <code>mcp-server-dev</code> plugin.</li>
+    </ul>
+  </article>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>Claude Code Directory — built for the Claude Code community. Not affiliated with Anthropic.</p>
+      <p><a href="https://github.com" target="_blank">GitHub</a> · <a href="../sponsor.html">Sponsor a listing</a> · <a href="index.html">Guides</a></p>
+    </div>
+  </footer>
+</body>
+</html>

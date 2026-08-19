@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Claude Code Directory — Best CLAUDE.md Rules, Commands, Agents & MCP Servers</title>
+  <meta name="description" content="The curated, searchable directory of CLAUDE.md files, slash commands, subagents and MCP servers for Claude Code. Copy-paste workflows used by real teams. Open source, updated daily.">
+  <meta name="keywords" content="claude code, claude code rules, CLAUDE.md, mcp servers, claude code commands, subagents, AI coding">
+  <meta property="og:title" content="Claude Code Directory">
+  <meta property="og:description" content="The best CLAUDE.md rules, commands, agents and MCP servers for Claude Code. Searchable, open source, free.">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="/" class="logo">🤖 ClaudeCode<span class="logo-accent">.dir</span></a>
+      <nav class="main-nav">
+        <a href="index.html">Rules</a>
+        <a href="#commands">Commands</a>
+        <a href="#agents">Agents</a>
+        <a href="guides/index.html">Guides</a>
+        <a href="sponsor.html" class="nav-cta">★ Sponsor</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <h1>The <span class="gradient">Claude Code</span> Directory</h1>
+        <p class="hero-sub">Search 60+ battle-tested CLAUDE.md files, slash commands, subagents and MCP servers — copy, paste, ship. 100% free &amp; open source.</p>
+        <div class="search-box">
+          <input type="search" id="searchInput" placeholder="Search rules, commands, agents, MCP servers…" autocomplete="off">
+        </div>
+        <div class="hero-stats">
+          <div class="stat"><span class="stat-num" id="statEntries">60+</span><span class="stat-label">Entries</span></div>
+          <div class="stat"><span class="stat-num">100%</span><span class="stat-label">Free</span></div>
+          <div class="stat"><span class="stat-num">MIT</span><span class="stat-label">Open Source</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="filters container">
+      <button class="filter-btn active" data-type="all">All</button>
+      <button class="filter-btn" data-type="claude-md">CLAUDE.md</button>
+      <button class="filter-btn" data-type="command">Commands</button>
+      <button class="filter-btn" data-type="agent">Agents</button>
+      <button class="filter-btn" data-type="mcp">MCP Servers</button>
+    </section>
+
+    <section class="container">
+      <div class="featured-strip" id="featuredStrip"></div>
+      <div class="grid" id="entriesGrid"></div>
+      <div class="empty-state" id="emptyState" hidden>
+        <p>No results for that search. <a href="https://github.com" target="_blank">Submit it on GitHub</a> — contributions welcome!</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>Claude Code Directory — built for the Claude Code community. Not affiliated with Anthropic.</p>
+      <p><a href="https://github.com" target="_blank">GitHub</a> · <a href="sponsor.html">Sponsor a listing</a> · <a href="guides/index.html">Guides</a></p>
+    </div>
+  </footer>
+
+  <div class="modal" id="detailModal" hidden>
+    <div class="modal-backdrop" data-close></div>
+    <div class="modal-card">
+      <button class="modal-close" data-close>×</button>
+      <div id="modalContent"></div>
+    </div>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

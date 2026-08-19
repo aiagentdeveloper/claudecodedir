@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guides — Claude Code Rules, MCP & Workflow Tutorials</title>
+  <meta name="description" content="Practical guides for Claude Code: writing CLAUDE.md, building custom commands, creating subagents and connecting MCP servers.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .guides-hero { padding: 50px 0 10px; text-align: center; }
+    .guides-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 16px; padding: 30px 0 60px; }
+    .guide-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; text-decoration: none; color: var(--text); display: block; transition: transform .15s, border-color .15s; }
+    .guide-card:hover { transform: translateY(-2px); border-color: var(--text-dim); }
+    .guide-card h3 { margin-bottom: 6px; }
+    .guide-card p { color: var(--text-dim); font-size: .88rem; }
+    .guide-card .tag { color: var(--accent); font-size: .75rem; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="../index.html" class="logo">🤖 ClaudeCode<span class="logo-accent">.dir</span></a>
+      <nav class="main-nav">
+        <a href="../index.html">Rules</a>
+        <a href="../index.html#commands">Commands</a>
+        <a href="../index.html#agents">Agents</a>
+        <a href="index.html">Guides</a>
+        <a href="../sponsor.html" class="nav-cta">★ Sponsor</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="guides-hero container">
+    <h1>Claude Code <span class="gradient">Guides</span></h1>
+    <p style="color:var(--text-dim);max-width:600px;margin:10px auto 0">Step-by-step tutorials on the workflows the directory entries use — everything in < 10 minutes.</p>
+  </section>
+
+  <section class="container">
+    <div class="guides-grid">
+      <a class="guide-card" href="write-claude-md.html">
+        <span class="tag">Beginner · 5 min</span>
+        <h3>How to Write a Great CLAUDE.md</h3>
+        <p>The one file that changes how Claude works in your repo: structure, length limits, and 5 copy-paste templates.</p>
+      </a>
+      <a class="guide-card" href="custom-commands.html">
+        <span class="tag">Beginner · 6 min</span>
+        <h3>Build Custom Slash Commands</h3>
+        <p>Turn your recurring workflows into /project: commands in minutes — with a review-command example.</p>
+      </a>
+      <a class="guide-card" href="mcp-servers.html">
+        <span class="tag">Intermediate · 8 min</span>
+        <h3>Connect MCP Servers (GitHub, Notion…)</h3>
+        <p>Give Claude real tools: official servers, scopes (.mcp.json vs ~/.claude.json) and security basics.</p>
+      </a>
+      <a class="guide-card" href="subagents.html">
+        <span class="tag">Intermediate · 7 min</span>
+        <h3>Create Subagents That Fix Your Workflow</h3>
+        <p>Dedicated personas for review, security and debugging — how .claude/agents/ works and 3 ready templates.</p>
+      </a>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>Claude Code Directory — built for the Claude Code community. Not affiliated with Anthropic.</p>
+      <p><a href="https://github.com" target="_blank">GitHub</a> · <a href="../sponsor.html">Sponsor a listing</a> · <a href="index.html">Guides</a></p>
+    </div>
+  </footer>
+</body>
+</html>

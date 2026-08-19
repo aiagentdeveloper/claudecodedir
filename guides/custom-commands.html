@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Build Custom Slash Commands in Claude Code — Guide</title>
+  <meta name="description" content="Turn recurring workflows into /project: commands in Claude Code. Markdown files become commands — with a working code-review example.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .article { max-width: 760px; margin: 0 auto; padding: 40px 0 70px; }
+    .article h1 { font-size: clamp(1.6rem, 4vw, 2.3rem); margin-bottom: 12px; }
+    .article .meta { color: var(--text-dim); font-size: .85rem; margin-bottom: 24px; }
+    .article h2 { margin: 32px 0 12px; font-size: 1.3rem; }
+    .article p, .article li { color: var(--text-dim); }
+    .article p, .article ul { margin-bottom: 14px; }
+    .article pre { background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 16px; overflow-x: auto; font-size: .85rem; margin-bottom: 18px; }
+    .article code { font-family: "SFMono-Regular", Consolas, monospace; background: var(--bg-soft); padding: 2px 6px; border-radius: 4px; font-size: .85em; }
+    .article pre code { background: none; padding: 0; }
+    .breadcrumb { color: var(--text-dim); font-size: .85rem; margin-bottom: 20px; }
+    .breadcrumb a { color: var(--text-dim); }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="../index.html" class="logo">🤖 ClaudeCode<span class="logo-accent">.dir</span></a>
+      <nav class="main-nav">
+        <a href="../index.html">Rules</a>
+        <a href="../index.html#commands">Commands</a>
+        <a href="../index.html#agents">Agents</a>
+        <a href="index.html">Guides</a>
+        <a href="../sponsor.html" class="nav-cta">★ Sponsor</a>
+      </nav>
+    </div>
+  </header>
+
+  <article class="article container">
+    <p class="breadcrumb"><a href="index.html">Guides</a> / Custom commands</p>
+    <h1>Build Custom Slash Commands</h1>
+    <p class="meta">6 min read · Beginner</p>
+
+    <p>Every markdown file in <code>.claude/commands/</code> becomes a custom slash command. The filename is the command name: <code>review.md</code> → <code>/project:review</code>. Put files in <code>~/.claude/commands/</code> and they become <code>/user:your-command</code> — available in every project.</p>
+
+    <h2>Anatomy of a command file</h2>
+    <p>Just write plain markdown — it's a prompt Claude reads when you invoke the command. Use <code>{placeholders}</code> for arguments and numbered steps to keep the output structured.</p>
+
+    <h2>Example: a code-review command</h2>
+    <p>Save this as <code>.claude/commands/review.md</code>:</p>
+    <pre><code># Code review
+Review the current git diff (against main) with these lenses:
+1. Correctness: logic bugs, edge cases, race conditions.
+2. Security: injection, secrets, authz gaps.
+3. Style: consistency with the repo's conventions.
+4. Tests: are the changes covered? missing cases?
+Output: file-by-file findings (severity), then a final verdict:
+APPROVE / REQUEST CHANGES with a numbered action list.
+Be specific; cite line numbers.</code></pre>
+    <p>Now <code>/project:review</code> gives you a structured review of your current diff. No re-explaining your process ever again.</p>
+
+    <h2>Command with an argument</h2>
+    <pre><code># Fix issue
+Fetch issue {number} via the GitHub MCP server.
+1. Summarize the problem and acceptance criteria.
+2. Reproduce it with the repo's test command.
+3. Implement the minimal fix following repo rules.
+4. Add a regression test that fails before / passes after.
+5. Run lint + full test suite.
+6. Summarize the change for a PR description.</code></pre>
+    <p>Usage: <code>/project:fix-issue 234</code> — Claude fetches issue #234 and drives the whole fix.</p>
+
+    <h2>Pro tips</h2>
+    <ul>
+      <li>Commands and skills are now the same mechanism — for bundled assets (files, scripts), use <code>skills/</code> instead.</li>
+      <li>Start commands with a one-line summary: <code># Fix issue</code> — Claude uses it to decide when the command is relevant.</li>
+      <li>Keep each command focused on ONE workflow.</li>
+      <li>Restart the session after adding new commands.</li>
+    </ul>
+
+    <h2>Next steps</h2>
+    <ul>
+      <li>Copy 14 ready-made commands from the <a href="../index.html">directory</a>.</li>
+      <li>Level up with <a href="subagents.html">subagents</a> for specialized roles.</li>
+    </ul>
+  </article>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>Claude Code Directory — built for the Claude Code community. Not affiliated with Anthropic.</p>
+      <p><a href="https://github.com" target="_blank">GitHub</a> · <a href="../sponsor.html">Sponsor a listing</a> · <a href="index.html">Guides</a></p>
+    </div>
+  </footer>
+</body>
+</html>

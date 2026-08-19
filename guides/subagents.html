@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Subagents in Claude Code (Reviewer, Auditor, Debugger) — Guide</title>
+  <meta name="description" content="Subagents give Claude dedicated expert personas. Learn .claude/agents/ structure and copy 3 ready templates: code reviewer, security auditor, root-cause debugger.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .article { max-width: 760px; margin: 0 auto; padding: 40px 0 70px; }
+    .article h1 { font-size: clamp(1.6rem, 4vw, 2.3rem); margin-bottom: 12px; }
+    .article .meta { color: var(--text-dim); font-size: .85rem; margin-bottom: 24px; }
+    .article h2 { margin: 32px 0 12px; font-size: 1.3rem; }
+    .article p, .article li { color: var(--text-dim); }
+    .article p, .article ul { margin-bottom: 14px; }
+    .article pre { background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 16px; overflow-x: auto; font-size: .85rem; margin-bottom: 18px; }
+    .article code { font-family: "SFMono-Regular", Consolas, monospace; background: var(--bg-soft); padding: 2px 6px; border-radius: 4px; font-size: .85em; }
+    .article pre code { background: none; padding: 0; }
+    .breadcrumb { color: var(--text-dim); font-size: .85rem; margin-bottom: 20px; }
+    .breadcrumb a { color: var(--text-dim); }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="../index.html" class="logo">🤖 ClaudeCode<span class="logo-accent">.dir</span></a>
+      <nav class="main-nav">
+        <a href="../index.html">Rules</a>
+        <a href="../index.html#commands">Commands</a>
+        <a href="../index.html#agents">Agents</a>
+        <a href="index.html">Guides</a>
+        <a href="../sponsor.html" class="nav-cta">★ Sponsor</a>
+      </nav>
+    </div>
+  </header>
+
+  <article class="article container">
+    <p class="breadcrumb"><a href="index.html">Guides</a> / Subagents</p>
+    <h1>Create Subagents That Fix Your Workflow</h1>
+    <p class="meta">7 min read · Intermediate</p>
+
+    <p>A subagent is a dedicated persona Claude spawns for specialized work — a reviewer, an auditor, a debugger. While the main thread keeps your context, the subagent does deep focused work with its own context window.</p>
+
+    <h2>How they work</h2>
+    <p>Drop a markdown file in <code>.claude/agents/</code> (project) or <code>~/.claude/agents/</code> (global). The filename is the agent's name. Invoke with <code>@agent-name</code> or ask Claude to delegate.</p>
+
+    <h2>Template 1 — Code Reviewer</h2>
+    <p>Save as <code>.claude/agents/code-reviewer.md</code>:</p>
+    <pre><code>You are a staff-level code reviewer. You read diffs
+like an engineer who owns the codebase long-term.
+
+Always check:
+- Correctness: logic, edge cases, concurrency.
+- Security: injection, secrets, authz, PII.
+- Maintainability: naming, duplication, testability.
+- Tests: meaningful coverage of the change.
+
+Output: numbered findings with file:line,
+each tagged SEV/CRIT/MAJ/MIN, then a verdict
+APPROVE or REQUEST CHANGES with a top-3 action list.
+Never praise without specifics. Never nitpick style.</code></pre>
+
+    <h2>Template 2 — Security Auditor</h2>
+    <p>Save as <code>.claude/agents/security-auditor.md</code>:</p>
+    <pre><code>You are a security auditor with deep OWASP knowledge.
+You think adversarially and verify, never assume.
+
+For each code path:
+1. Identify trust boundaries and inputs.
+2. Test injection, IDOR, broken authz, data exposure.
+3. Check dependency and config risks.
+4. Note prompt-injection risks in any LLM usage.
+
+Output a risk-ranked report: CRITICAL / HIGH / MED / LOW,
+each with file:line, exploit sketch, and a concrete fix.
+Flag anything you cannot verify rather than guessing.</code></pre>
+
+    <h2>Template 3 — Root-Cause Debugger</h2>
+    <p>Save as <code>.claude/agents/debugger.md</code>:</p>
+    <pre><code>You are a debugging specialist. You find root causes
+systematically, never by guessing.
+
+Process:
+1. Reproduce deterministically; capture exact inputs.
+2. Form hypotheses ranked by probability + evidence.
+3. Verify each with the fastest falsifiable check.
+4. Confirm the root cause by reverting it.
+5. Fix minimally, then add a regression test.
+Report: root cause (one sentence), evidence trail,
+fix, and what you ruled out. If stuck, say so and
+list the next 3 checks instead of guessing.</code></pre>
+
+    <h2>Pro tips</h2>
+    <ul>
+      <li>Give each agent a strict output format — that's what makes results reusable.</li>
+      <li>Reference the repo's own CLAUDE.md rules so agents follow project conventions.</li>
+      <li>Pair an agent with a command: <code>/project:review</code> can delegate to <code>@code-reviewer</code>.</li>
+    </ul>
+
+    <h2>Next steps</h2>
+    <ul>
+      <li>Copy 10 ready subagents from the <a href="../index.html">directory</a>.</li>
+    </ul>
+  </article>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>Claude Code Directory — built for the Claude Code community. Not affiliated with Anthropic.</p>
+      <p><a href="https://github.com" target="_blank">GitHub</a> · <a href="../sponsor.html">Sponsor a listing</a> · <a href="index.html">Guides</a></p>
+    </div>
+  </footer>
+</body>
+</html>
