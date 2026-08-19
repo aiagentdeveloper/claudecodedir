@@ -1,4 +1,15 @@
-// Claude Code Directory — dataset
+// ─────────────────────────── AFFILIATE LINKS ───────────────────────────
+// Fill in YOUR codes after signing up for each program, then the
+// "view source" buttons automatically become monetized referral links.
+// Programs: cursor.com (30% recurring), lovable.dev (30% first year),
+// bolt.new (20%), vercel (affiliate). Set to "" to disable.
+const AFFILIATES = {
+  cursor: "https://cursor.com/?referral_code=YOUR_CURSOR_CODE",
+  lovable: "https://lovable.dev/?ref=YOUR_LOVABLE_CODE",
+  bolt: "https://bolt.new/?ref=YOUR_BOLT_CODE",
+  vercel: "https://vercel.com/?ref=YOUR_VERCEL_CODE"
+};
+
 // Entries: type = claude-md | command | agent | mcp
 // featured = paid/sponsored listing slot
 

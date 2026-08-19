@@ -55,6 +55,12 @@
     return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
   }
 
+  function affiliateUrl(entry) {
+    const tag = entry.affiliate || null;
+    if (!tag || !AFFILIATES[tag]) return null;
+    return AFFILIATES[tag];
+  }
+
   function openModal(entry) {
     const t = TYPE_LABELS[entry.type];
     const modal = $("#detailModal");
@@ -77,7 +83,8 @@
       </div>
       <div class="m-links">
         ${entry.link ? `<a class="btn-ghost" href="${entry.link}" target="_blank" rel="noopener">View source ↗</a>` : ""}
-        <a class="btn-primary" href="sponsor.html">★ Feature this listing</a>
+        ${affiliateUrl(entry) ? `<a class="btn-primary" href="${affiliateUrl(entry)}" target="_blank" rel="sponsored noopener">Get ${entry.affiliateName || entry.title} ↗</a>` : ""}
+        <a class="btn-ghost" href="sponsor.html">★ Feature this listing</a>
       </div>`;
     modal.classList.add("open");
     document.body.style.overflow = "hidden";
@@ -88,8 +95,28 @@
     document.body.style.overflow = "";
   }
 
+  function renderRecTools() {
+    const names = {
+      cursor: { name: "Cursor", desc: "The AI code editor (30% recurring commission on referrals)" },
+      lovable: { name: "Lovable", desc: "Build apps with AI in minutes" },
+      bolt: { name: "Bolt.new", desc: "AI app builder for the browser" },
+      vercel: { name: "Vercel", desc: "Deploy & host your AI apps" }
+    };
+    const items = Object.entries(AFFILIATES).filter(([, url]) => url && !url.includes("YOUR_"));
+    if (!items.length) return;
+    const grid = $("#recGrid");
+    grid.innerHTML = items.map(([key, url]) => `
+      <div class="rec-card">
+        <h3>${names[key]?.name || key}</h3>
+        <p>${names[key]?.desc || ""}</p>
+        <a href="${url}" target="_blank" rel="sponsored noopener">Try ${names[key]?.name || key} ↗</a>
+      </div>`).join("");
+    $("#recTools").hidden = false;
+  }
+
   function init() {
     renderFeatured();
+    renderRecTools();
     renderCards(DATA, $("#entriesGrid"));
 
     const search = $("#searchInput");
@@ -136,7 +163,13 @@
       if (e.key === "Escape") closeModal();
     });
 
-    $("#statEntries").textContent = DATA.length + "+";
+    const counts = { "claude-md": 0, command: 0, agent: 0, mcp: 0 };
+    DATA.forEach((e) => { counts[e.type] = (counts[e.type] || 0) + 1; });
+    $("#statEntries").textContent = DATA.length;
+    $("#statMd").textContent = counts["claude-md"];
+    $("#statCmd").textContent = counts.command;
+    $("#statAgent").textContent = counts.agent;
+    $("#statMcp").textContent = counts.mcp;
   }
 
   document.addEventListener("DOMContentLoaded", init);

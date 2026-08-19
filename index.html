@@ -36,9 +36,11 @@
           <input type="search" id="searchInput" placeholder="Search rules, commands, agents, MCP servers…" autocomplete="off">
         </div>
         <div class="hero-stats">
-          <div class="stat"><span class="stat-num" id="statEntries">60+</span><span class="stat-label">Entries</span></div>
-          <div class="stat"><span class="stat-num">100%</span><span class="stat-label">Free</span></div>
-          <div class="stat"><span class="stat-num">MIT</span><span class="stat-label">Open Source</span></div>
+          <div class="stat"><span class="stat-num" id="statEntries">0</span><span class="stat-label">Entries</span></div>
+          <div class="stat"><span class="stat-num" id="statMd">0</span><span class="stat-label">CLAUDE.md</span></div>
+          <div class="stat"><span class="stat-num" id="statCmd">0</span><span class="stat-label">Commands</span></div>
+          <div class="stat"><span class="stat-num" id="statAgent">0</span><span class="stat-label">Agents</span></div>
+          <div class="stat"><span class="stat-num" id="statMcp">0</span><span class="stat-label">MCP Servers</span></div>
         </div>
       </div>
     </section>
@@ -55,9 +57,27 @@
       <div class="featured-strip" id="featuredStrip"></div>
       <div class="grid" id="entriesGrid"></div>
       <div class="empty-state" id="emptyState" hidden>
-        <p>No results for that search. <a href="https://github.com" target="_blank">Submit it on GitHub</a> — contributions welcome!</p>
+        <p>No results for that search. <a href="https://github.com/aiagentdeveloper/claudecodedir/issues" target="_blank">Submit it on GitHub</a> — contributions welcome!</p>
       </div>
     </section>
+
+    <section class="container" id="recTools" hidden>
+      <h2 class="rec-title">Tools we recommend</h2>
+      <div class="rec-grid" id="recGrid"></div>
+    </section>
+  <section class="newsletter">
+      <div class="container newsletter-inner">
+        <h2>Weekly: The 5 Best New Claude Code Workflows</h2>
+        <p>New CLAUDE.md files, commands and MCP servers — curated once a week. No spam, unsubscribe anytime.</p>
+        <form id="newsletterForm" action="https://buttondown.com/api/emails/embed-subscribe/yourusername" method="post" target="_blank">
+          <input type="email" name="email" placeholder="you@example.com" required>
+          <input type="hidden" value="1" name="embed">
+          <button type="submit">Subscribe free</button>
+        </form>
+        <p class="newsletter-note">Join 0 builders reading the Claude Code Weekly</p>
+      </div>
+    </section>
+
   </main>
 
   <footer class="site-footer">
