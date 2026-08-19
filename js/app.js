@@ -1,5 +1,11 @@
 // Claude Code Directory — app logic
 
+// Frame-busting: GitHub Pages cannot send X-Frame-Options, so enforce
+// no-embedding in JS (CSP meta frame-ancestors is ignored by browsers).
+if (window.top !== window.self) {
+  window.top.location = window.self.location;
+}
+
 (function () {
   const TYPE_LABELS = {
     "claude-md": { label: "CLAUDE.md", icon: "📄" },
