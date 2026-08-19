@@ -1156,6 +1156,352 @@ claude mcp add slack -- npx -y @modelcontextprotocol/server-slack
 # Security: only add marketplaces you trust;
 # manage restrictions via managed-settings.json.`,
     install: "Plugins can bundle skills, agents, hooks and MCP configs. Check each plugin's repo before installing."
+  },
+  // ─────────────────────────── NEW: CLAUDE.md FILES ───────────────────────────
+  {
+    id: "md-docs-conventions",
+    type: "claude-md",
+    title: "Docs & README Conventions",
+    desc: "Rules for writing clear docs: README structure, code comments and changelog discipline.",
+    tags: ["docs", "readme", "conventions"],
+    featured: false,
+    source: "Community template",
+    link: "https://code.claude.com/docs/en/memory",
+    preview: `# Docs conventions
+- README: what → why → quick start → API → troubleshooting.
+- Explain 'why' in comments, not 'what'.
+- Keep examples runnable; verify before merging.
+- Changelog: Keep a Changelog format.
+- Link external docs, don't copy them.
+- Deprecate in two steps: warning, then removal.`,
+    install: "Add to .claude/rules/docs.md — path-gate to docs/ directories with paths."
+  },
+  {
+    id: "md-react-native",
+    type: "claude-md",
+    title: "React Native Conventions",
+    desc: "Mobile-specific rules: navigation, styling, platform splits and release hygiene.",
+    tags: ["react-native", "mobile", "style"],
+    featured: false,
+    source: "Community template",
+    link: "https://code.claude.com/docs/en/memory",
+    preview: `# React Native
+- TypeScript strict; typed navigation params.
+- Style with StyleSheet.create or NativeWind, not inline.
+- Platform-specific code in .ios.tsx/.android.tsx files.
+- New arch compatible components only.
+- Test with Jest + React Native Testing Library.
+- Bump versionCode + buildNumber on every release.`,
+    install: "Add to .claude/rules/react-native.md."
+  },
+  {
+    id: "md-python-data",
+    type: "claude-md",
+    title: "Python & Data Conventions",
+    desc: "Python/data engineering rules: typing, pandas usage, notebook hygiene and reproducibility.",
+    tags: ["python", "data", "pandas"],
+    featured: false,
+    source: "Community template",
+    link: "https://code.claude.com/docs/en/memory",
+    preview: `# Python / data
+- Python 3.12+, pyproject.toml, uv or poetry.
+- Type hints everywhere; use dataclasses for records.
+- pandas: chain operations, avoid inplace, use .copy().
+- Notebooks: deterministic seeds, no hidden state.
+- Pin dependencies; CI runs ruff + mypy + pytest.
+- Never commit data files > 5 MB; use DVC or refs.`,
+    install: "Add to .claude/rules/python.md."
+  },
+  // ─────────────────────────── NEW: COMMANDS ───────────────────────────
+  {
+    id: "cmd-doc",
+    type: "command",
+    title: "/doc",
+    desc: "Adds JSDoc / docstrings and comments to the given files — built into Claude Code.",
+    tags: ["docs", "builtin", "quick"],
+    featured: false,
+    source: "Built-in",
+    link: "https://code.claude.com/docs/en/slash-commands",
+    preview: `# Usage
+/doc path/to/file.ts path/to/other.ts
+
+# Behavior
+- Reads each file, adds JSDoc/docstrings.
+- Summarizes functions, params and returns.
+- Skips files already fully documented.
+- Writes back only when the diff is clean.`,
+    install: "Built into Claude Code — no setup needed. Run /doc <files>."
+  },
+  {
+    id: "cmd-eng",
+    type: "command",
+    title: "/eng",
+    desc: "The engineering kickoff prompt: loads project context, conventions and requirements before implementation.",
+    tags: ["kickoff", "workflow", "best-practice"],
+    featured: false,
+    source: "Anthropic docs",
+    link: "https://code.claude.com/docs/en/slash-commands",
+    preview: `# Example custom command
+Your first task: understand the full requirements
+before writing any code.
+
+1. Read README + CLAUDE.md + relevant docs.
+2. Map the changes to the existing architecture.
+3. Identify risks (breaking changes, data, security).
+4. Propose a plan and confirm before coding.
+5. Implement in small commits with tests.
+
+Never start coding before the plan is approved.`,
+    install: "Save as .claude/commands/eng.md — then run /eng whenever a task begins."
+  },
+  {
+    id: "cmd-benchmark",
+    type: "command",
+    title: "/benchmark",
+    desc: "Runs your test suite against a few checkpoints to catch regressions from recent changes.",
+    tags: ["testing", "regression", "builtin"],
+    featured: false,
+    source: "Built-in",
+    link: "https://code.claude.com/docs/en/slash-commands",
+    preview: `# Usage
+/benchmark
+
+# Behavior
+- Snapshot current test state.
+- Apply recent changes and rerun.
+- Reports pass/fail deltas per checkpoint.
+- Flags unexpected failures before commit.`,
+    install: "Built into Claude Code — run /benchmark before shipping a batch of changes."
+  },
+  {
+    id: "cmd-pr-review",
+    type: "command",
+    title: "/pr-review",
+    desc: "Reviews a PR against your repo's conventions: diff, security, tests and commit hygiene.",
+    tags: ["review", "pr", "quality"],
+    featured: false,
+    source: "Community command",
+    link: "https://code.claude.com/docs/en/slash-commands",
+    preview: `# pr-review.md
+Review the PR in the current branch:
+
+1. Read the diff and the linked issue.
+2. Check: security (secrets, injection, authz).
+3. Check: tests cover the new behavior.
+4. Check: naming, style and repo conventions.
+5. Post a summary with requested changes.
+
+Output format:
+**Verdict**: approve | changes requested
+**Issues**: n critical, m warnings
+**Notes**: bullet list`,
+    install: "Save as .claude/commands/pr-review.md — run /pr-review on any branch."
+  },
+  // ─────────────────────────── NEW: AGENTS ───────────────────────────
+  {
+    id: "agent-web-arch",
+    type: "agent",
+    title: "/web-arch",
+    desc: "Web architecture agent: designs frontend architecture, data flow and API contracts before implementation.",
+    tags: ["architecture", "frontend", "planning"],
+    featured: false,
+    source: "Anthropic docs",
+    link: "https://code.claude.com/docs/en/agents",
+    preview: `You are a senior web architect.
+
+Before writing code, produce:
+1. Component tree with state ownership.
+2. Data flow: server state, cache keys, invalidation.
+3. API contract: endpoints, types, error shapes.
+4. Performance: bundle, image, memoization strategy.
+5. Accessibility and SEO checklist.
+
+Work with the user to refine the plan
+before any implementation begins.`,
+    install: "Save as .claude/agents/web-arch.md — reference it with @web-arch."
+  },
+  {
+    id: "agent-pull-requests",
+    type: "agent",
+    title: "/pull-requests",
+    desc: "PR drafting agent: writes clear PRs from the current diff and closes them with the right labels.",
+    tags: ["pr", "git", "automation"],
+    featured: false,
+    source: "Anthropic docs",
+    link: "https://code.claude.com/docs/en/agents",
+    preview: `You are a pull request agent.
+
+1. Analyze the diff vs the linked issue.
+2. Draft a concise PR title + description.
+3. Summarize changes, testing, and risks.
+4. Add appropriate labels and reviewers.
+5. Mention follow-up work if any.
+
+Never push or force-push without permission.`,
+    install: "Save as .claude/agents/pull-requests.md — use @pull-requests after a feature branch is done."
+  },
+  {
+    id: "agent-security-review",
+    type: "agent",
+    title: "/security-review",
+    desc: "Security agent: audits the codebase for OWASP-style risks — secrets, injection, authz, dependencies.",
+    tags: ["security", "audit", "review"],
+    featured: false,
+    source: "Community agent",
+    link: "https://code.claude.com/docs/en/agents",
+    preview: `You are a security reviewer.
+
+Audit the provided code for:
+1. Secrets and keys in code or logs.
+2. Injection (SQL, shell, template, prompt).
+3. Authn/authz: missing checks, IDOR, privilege issues.
+4. Unsafe deserialization and SSRF.
+5. Vulnerable dependencies.
+
+Report with severity + file:line for each finding.
+Never run destructive commands.`,
+    install: "Save as .claude/agents/security-review.md — run periodically via /security-review."
+  },
+  // ─────────────────────────── NEW: MCP SERVERS ───────────────────────────
+  {
+    id: "mcp-brave",
+    type: "mcp",
+    title: "Brave Search",
+    desc: "Official MCP server for Brave Search: live web search with AI-friendly results and citations.",
+    tags: ["search", "web", "official"],
+    featured: false,
+    source: "Official (brave)",
+    link: "https://github.com/brave/brave-search-mcp-server",
+    preview: `# Connect
+claude mcp add brave-search -- npx -y @brave/brave-search-mcp-server
+
+# .mcp.json
+{
+  "mcpServers": {
+    "brave-search": {
+      "command": "npx",
+      "args": ["-y", "@brave/brave-search-mcp-server"],
+      "env": { "BRAVE_API_KEY": "\${BRAVE_API_KEY}" }
+    }
+  }
+}`,
+    install: "Get a free API key at brave.com/search/api, then Claude can search the web for you."
+  },
+  {
+    id: "mcp-figma",
+    type: "mcp",
+    title: "Figma",
+    desc: "Figma's official MCP: inspect designs, extract variables and get component specs from your files.",
+    tags: ["figma", "design", "official"],
+    featured: false,
+    source: "Official (Figma)",
+    link: "https://github.com/figma/figma-developer-mcp",
+    preview: `# Connect
+claude mcp add figma -- npx -y figma-developer-mcp --figma-api-key=<KEY>
+
+# .mcp.json
+{
+  "mcpServers": {
+    "figma": {
+      "command": "npx",
+      "args": ["-y", "figma-developer-mcp", "--figma-api-key=\${FIGMA_API_KEY}"]
+    }
+  }
+}`,
+    install: "Generate a Figma access token (Account settings → Security), then Claude can read designs directly."
+  },
+  {
+    id: "mcp-sentry",
+    type: "mcp",
+    title: "Sentry",
+    desc: "Sentry's official MCP: pull issues, stack traces and release health straight into Claude Code.",
+    tags: ["sentry", "debugging", "monitoring"],
+    featured: false,
+    source: "Official (Sentry)",
+    link: "https://github.com/getsentry/sentry-mcp",
+    preview: `# Connect
+claude mcp add sentry -- npx -y sentry-mcp
+
+# .mcp.json
+{
+  "mcpServers": {
+    "sentry": {
+      "command": "npx",
+      "args": ["-y", "sentry-mcp"],
+      "env": { "SENTRY_AUTH_TOKEN": "\${SENTRY_AUTH_TOKEN}", "SENTRY_ORG": "\${SENTRY_ORG}" }
+    }
+  }
+}`,
+    install: "Create an auth token in Sentry (Settings → Auth Tokens) and grant it the scopes you need."
+  },
+  {
+    id: "mcp-puppeteer",
+    type: "mcp",
+    title: "Puppeteer",
+    desc: "Official Puppeteer MCP: browser automation, screenshots and DOM inspection via the Chrome DevTools Protocol.",
+    tags: ["browser", "automation", "official"],
+    featured: false,
+    source: "Official (Google)",
+    link: "https://github.com/modelcontextprotocol/servers/tree/main/src/puppeteer",
+    preview: `# Connect
+claude mcp add puppeteer -- npx -y @modelcontextprotocol/server-puppeteer
+
+# .mcp.json
+{
+  "mcpServers": {
+    "puppeteer": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-puppeteer"]
+    }
+  }
+}`,
+    install: "Lets Claude open pages, click through flows, screenshot and inspect the DOM — great for UI checks."
+  },
+  {
+    id: "mcp-postgres",
+    type: "mcp",
+    title: "Postgres",
+    desc: "Official Postgres MCP: query your database, inspect schema and run read-only analytics with Claude.",
+    tags: ["database", "postgres", "sql"],
+    featured: false,
+    source: "Official (MCP servers)",
+    link: "https://github.com/modelcontextprotocol/servers/tree/main/src/postgres",
+    preview: `# Connect
+claude mcp add postgres -- npx -y @modelcontextprotocol/server-postgres postgresql://user:pass@localhost:5432/db
+
+# .mcp.json
+{
+  "mcpServers": {
+    "postgres": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-postgres", "postgresql://\${PG_URL}"]
+    }
+  }
+}`,
+    install: "Point it at a read replica or sandbox DB — Claude can explore schema and run analytics queries."
+  },
+  {
+    id: "mcp-fetch",
+    type: "mcp",
+    title: "Fetch",
+    desc: "Official Fetch MCP: retrieve web pages, strip markup and summarize content in a Claude-friendly format.",
+    tags: ["web", "fetch", "official"],
+    featured: false,
+    source: "Official (MCP servers)",
+    link: "https://github.com/modelcontextprotocol/servers/tree/main/src/fetch",
+    preview: `# Connect
+claude mcp add fetch -- npx -y @modelcontextprotocol/server-fetch
+
+# .mcp.json
+{
+  "mcpServers": {
+    "fetch": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-fetch"]
+    }
+  }
+}`,
+    install: "No API key needed — great for reading docs, blogs and changelogs during development."
   }
 ];
 

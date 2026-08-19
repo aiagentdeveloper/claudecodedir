@@ -7,7 +7,8 @@ body:
     id: name
     attributes:
       label: Name
-      description: The name shown in the directory.
+      description: The name shown in the directory. Keep it short and descriptive.
+      placeholder: e.g. "Postgres Schema Explorer"
     validations:
       required: true
   - type: dropdown
@@ -27,25 +28,46 @@ body:
     attributes:
       label: Repo / link
       description: Public link to the project (GitHub repo, docs, or marketplace page).
+      placeholder: e.g. "https://github.com/yourname/your-repo"
     validations:
       required: true
   - type: textarea
     id: desc
     attributes:
       label: Short description
-      description: One or two sentences — what it does and who it's for.
+      description: One or two sentences — what it does and who it's for. This becomes the card text on the site.
       placeholder: e.g. "An MCP server that indexes your Postgres schema so Claude can write precise queries."
     validations:
       required: true
+  - type: input
+    id: tags
+    attributes:
+      label: Tags (optional)
+      description: Comma-separated keywords used for filtering and search.
+      placeholder: e.g. "database, postgres, sql"
+  - type: textarea
+    id: preview
+    attributes:
+      label: Preview / install snippet (optional)
+      description: The code or config block shown when visitors click your entry (e.g. claude mcp add, or the /command content).
+      placeholder: |
+        claude mcp add my-server -- npx -y @your/server
+
+        # .mcp.json
+        {
+          "mcpServers": {
+            "my-server": { "command": "npx", "args": ["-y", "@your/server"] }
+          }
+        }
   - type: textarea
     id: extra
     attributes:
       label: Extra (optional)
-      description: Tags you'd like, screenshots, install instructions, or a longer preview snippet.
+      description: Anything else — screenshots, install instructions, credits.
   - type: checkboxes
     id: agree
     attributes:
       label: Confirmation
       options:
-        - label: The project is publicly accessible and not affiliated with Anthropic.
+        - label: The project is publicly accessible, free or paid, and not affiliated with Anthropic.
           required: true
