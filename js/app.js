@@ -136,6 +136,13 @@
     }
 
     search.addEventListener("input", apply);
+    search.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        apply();
+        document.querySelector(".grid")?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    });
     filters.forEach((btn) => {
       btn.addEventListener("click", () => {
         filters.forEach((b) => b.classList.remove("active"));
