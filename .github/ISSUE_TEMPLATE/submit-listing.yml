@@ -1,0 +1,51 @@
+name: Submit a listing
+description: Add your CLAUDE.md, command, agent or MCP server to the Claude Code Directory (free).
+title: "Listing: [name of your tool/entry]"
+labels: ["listing"]
+body:
+  - type: input
+    id: name
+    attributes:
+      label: Name
+      description: The name shown in the directory.
+    validations:
+      required: true
+  - type: dropdown
+    id: type
+    attributes:
+      label: Type
+      description: Which category does it belong to?
+      options:
+        - CLAUDE.md
+        - Command
+        - Agent
+        - MCP server
+    validations:
+      required: true
+  - type: input
+    id: url
+    attributes:
+      label: Repo / link
+      description: Public link to the project (GitHub repo, docs, or marketplace page).
+    validations:
+      required: true
+  - type: textarea
+    id: desc
+    attributes:
+      label: Short description
+      description: One or two sentences — what it does and who it's for.
+      placeholder: e.g. "An MCP server that indexes your Postgres schema so Claude can write precise queries."
+    validations:
+      required: true
+  - type: textarea
+    id: extra
+    attributes:
+      label: Extra (optional)
+      description: Tags you'd like, screenshots, install instructions, or a longer preview snippet.
+  - type: checkboxes
+    id: agree
+    attributes:
+      label: Confirmation
+      options:
+        - label: The project is publicly accessible and not affiliated with Anthropic.
+          required: true
